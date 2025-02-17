@@ -5,11 +5,11 @@
 4. Use conditions to return one of the multiple string values
 5. Use console.log to test function
 */
+const rock = "Rock";
+const paper = "Paper";
+const scissors = "Scissors";
 
 function getComputerChoice() {
-  const rock = "Rock";
-  const paper = "Paper";
-  const scissors = "Scissors";
   let selectedOption = Math.random();
   if (selectedOption <= 0.3) {
     return rock;
