@@ -1,4 +1,5 @@
 /*
+Computer logic:
 1. Create new function named getComputerChoice
 2. getComputerChoice to randomly return one of following string values = "rock", "paper", "scissors"
 3. Use Math.random method to return random number
@@ -21,3 +22,30 @@ function getComputerChoice() {
 }
 
 console.log(getComputerChoice());
+
+/*
+Human logic:
+1. Create new function named getHumanChoice
+2. Create prompt to get user imput
+3. Console.log user input
+*/
+
+function getHumanChoice() {
+  let humanChoice = prompt(
+    `Your turn! Enter "rock", "paper" or scissors" below:`
+  );
+
+  if (
+    humanChoice !== rock &&
+    humanChoice !== paper &&
+    humanChoice !== scissors
+  ) {
+    alert(`You must choose either "rock", "paper" or scissors".`);
+  } else {
+    alert("Thanks for picking an option!");
+  }
+
+  console.log(humanChoice);
+}
+
+getHumanChoice();
