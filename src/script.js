@@ -10,18 +10,15 @@ const rock = "Rock";
 const paper = "Paper";
 const scissors = "Scissors";
 
-function getComputerChoice() {
-  let computerChoice = Math.random();
-  if (computerChoice <= 0.3) {
+function getComputerChoice(choice) {
+  if (choice <= 0.3) {
     return rock;
-  } else if (computerChoice > 0.3 && computerChoice <= 0.6) {
+  } else if (choice > 0.3 && choice <= 0.6) {
     return paper;
-  } else if (computerChoice > 0.6 && computerChoice <= 1) {
+  } else if (choice > 0.6 && choice <= 1) {
     return scissors;
   }
 }
-
-console.log(getComputerChoice());
 
 /*
 Human logic:
@@ -31,25 +28,54 @@ Human logic:
 */
 
 function getHumanChoice() {
-  function capitaliseFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  let humanChoice = capitaliseFirstLetter(
-    prompt(`Your turn! Enter "rock", "paper" or "scissors" below:`)
+  let humanChoiceInput = prompt(
+    `Your turn! Enter "rock", "paper" or "scissors" below:`
   );
 
   if (
-    humanChoice !== rock &&
-    humanChoice !== paper &&
-    humanChoice !== scissors
+    humanChoiceInput !== rock &&
+    humanChoiceInput !== paper &&
+    humanChoiceInput !== scissors
   ) {
     alert(`You must choose either "rock", "paper" or "scissors".`);
   } else {
     alert("Thanks for picking an option!");
   }
 
-  console.log(humanChoice);
+  return humanChoiceInput;
 }
 
-getHumanChoice();
+/*Declare the players score variables:
+1. Create a variable named humanScore
+2. Create a variable named computerScore
+3. Initialise those two variables with a 0
+*/
+
+let humanScore = 0;
+let computerScore = 0;
+
+/*Write the logic to play a single round
+1. Create a new function named playRound
+2. Define two parameters for playRound:
+humanChoice and computerChoice
+3. Make your function's humanChoice parameter case insensitive
+ so that players can input "rock", "ROCK", "RocK",
+  or other variations.
+  - manipulate below code previously used to get this to work:
+// function capitaliseFirstLetter(string) {
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// }
+
+  4. Write the code for your playRound function to console.log
+  a string value representing the round winner, such as
+  "You lose! Paper beats rock".
+  5. Increment the humanScore or computerScore variable
+   based on the round winner.
+*/
+
+function playRound(humanChoice, computerChoice) {
+  console.log(humanChoice);
+  console.log(computerChoice);
+}
+
+playRound(getHumanChoice(), getComputerChoice(Math.random()));
