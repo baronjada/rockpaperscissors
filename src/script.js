@@ -10,12 +10,12 @@ const rock = "rock";
 const paper = "paper";
 const scissors = "scissors";
 
-function getComputerChoice(choice) {
-  if (choice <= 0.3) {
+function getComputerChoice(compChoice) {
+  if (compChoice <= 0.3) {
     return rock;
-  } else if (choice > 0.3 && choice <= 0.6) {
+  } else if (compChoice > 0.3 && compChoice <= 0.6) {
     return paper;
-  } else if (choice > 0.6 && choice <= 1) {
+  } else if (compChoice > 0.6 && compChoice <= 1) {
     return scissors;
   }
 }
@@ -41,7 +41,7 @@ function getHumanChoice() {
   ) {
     alert(`You must choose either "rock", "paper" or "scissors".`);
   } else {
-    alert("Thanks for picking an option!");
+    alert("Good luck!");
   }
 
   return humanChoiceInput;
@@ -65,17 +65,42 @@ humanChoice and computerChoice - done
     or other variations. - done
   4. Write the code for your playRound function to console.log
   a string value representing the round winner, such as
-  "You lose! Paper beats rock".
+  "You lose! Paper beats rock". - done
   5. Increment the humanScore or computerScore variable
-   based on the round winner.
+   based on the round winner. - done
 */
 
 function playRound(humanChoice, computerChoice) {
-  console.log("Human: " + humanChoice);
-  console.log("Computer: " + computerChoice);
+  if (humanChoice == computerChoice) {
+    console.log("You drew the same thing! No winners here.");
+  } else if (humanChoice == paper && computerChoice == scissors) {
+    console.log("Computer wins! Scissors beats paper.");
+    computerScore++;
+  } else if (humanChoice == scissors && computerChoice == paper) {
+    console.log("You win! Scissors beats paper.");
+    humanScore++;
+  } else if (humanChoice == rock && computerChoice == paper) {
+    console.log("Computer wins! Paper beats rock.");
+    computerScore++;
+  } else if (humanChoice == paper && computerChoice == rock) {
+    console.log("You win! Paper beats rock.");
+    humanScore++;
+  } else if (humanChoice == scissors && computerChoice == rock) {
+    console.log("Computer wins! Rock beats scissors.");
+    computerScore++;
+  } else if (humanChoice == rock && computerChoice == scissors) {
+    console.log("You win! Rock beats scissors.");
+    humanScore++;
+  } else {
+    console.log("Let me decide who wins here... I'll be back!");
+  }
 }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice(Math.random());
 
 playRound(humanSelection, computerSelection);
+
+console.log(
+  `In case you were curious... you picked ${humanSelection} and the computer picked ${computerSelection}. You have ${humanScore} points and the computer has ${computerScore} points.`
+);
