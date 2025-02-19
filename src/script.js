@@ -31,8 +31,12 @@ Human logic:
 */
 
 function getHumanChoice() {
-  let humanChoice = prompt(
-    `Your turn! Enter "rock", "paper" or scissors" below:`
+  function capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  let humanChoice = capitaliseFirstLetter(
+    prompt(`Your turn! Enter "rock", "paper" or scissors" below:`)
   );
 
   if (
