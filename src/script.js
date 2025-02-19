@@ -36,7 +36,7 @@ function getHumanChoice() {
   }
 
   let humanChoice = capitaliseFirstLetter(
-    prompt(`Your turn! Enter "rock", "paper" or scissors" below:`)
+    prompt(`Your turn! Enter "rock", "paper" or "scissors" below:`)
   );
 
   if (
@@ -44,7 +44,7 @@ function getHumanChoice() {
     humanChoice !== paper &&
     humanChoice !== scissors
   ) {
-    alert(`You must choose either "rock", "paper" or scissors".`);
+    alert(`You must choose either "rock", "paper" or "scissors".`);
   } else {
     alert("Thanks for picking an option!");
   }
