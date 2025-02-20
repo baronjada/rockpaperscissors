@@ -94,10 +94,21 @@ function playRound(humanChoice, computerChoice) {
   } else {
     console.log("Let me decide who wins here... I'll be back!");
   }
+  // rebuild above if else statements as switch statement;
+  // make "else" statement the default within switch statement
 }
+
+//   switch (true) {
+//     case humanChoice == computerChoice:
+//       console.log("You drew the same thing! No winners here.");
+//     break;
+
+//   }
+// }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice(Math.random());
+// const computerSelection = getComputerChoice(0.2);
 
 playRound(humanSelection, computerSelection);
 
