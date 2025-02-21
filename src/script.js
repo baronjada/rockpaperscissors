@@ -71,44 +71,41 @@ humanChoice and computerChoice - done
 */
 
 function playRound(humanChoice, computerChoice) {
-  if (humanChoice == computerChoice) {
-    console.log("You drew the same thing! No winners here.");
-  } else if (humanChoice == paper && computerChoice == scissors) {
-    console.log("Computer wins! Scissors beats paper.");
-    computerScore++;
-  } else if (humanChoice == scissors && computerChoice == paper) {
-    console.log("You win! Scissors beats paper.");
-    humanScore++;
-  } else if (humanChoice == rock && computerChoice == paper) {
-    console.log("Computer wins! Paper beats rock.");
-    computerScore++;
-  } else if (humanChoice == paper && computerChoice == rock) {
-    console.log("You win! Paper beats rock.");
-    humanScore++;
-  } else if (humanChoice == scissors && computerChoice == rock) {
-    console.log("Computer wins! Rock beats scissors.");
-    computerScore++;
-  } else if (humanChoice == rock && computerChoice == scissors) {
-    console.log("You win! Rock beats scissors.");
-    humanScore++;
-  } else {
-    console.log("Let me decide who wins here... I'll be back!");
+  switch (true) {
+    case humanChoice == computerChoice:
+      console.log("You drew the same thing! No winners here.");
+      break;
+    case humanChoice == paper && computerChoice == scissors:
+      console.log("Computer wins! Scissors beats paper.");
+      computerScore++;
+      break;
+    case humanChoice == scissors && computerChoice == paper:
+      console.log("You win! Scissors beats paper.");
+      humanScore++;
+      break;
+    case humanChoice == rock && computerChoice == paper:
+      console.log("Computer wins! Paper beats rock.");
+      computerScore++;
+      break;
+    case humanChoice == paper && computerChoice == rock:
+      console.log("You win! Paper beats rock.");
+      humanScore++;
+      break;
+    case humanChoice == scissors && computerChoice == rock:
+      console.log("Computer wins! Rock beats scissors.");
+      computerScore++;
+      break;
+    case humanChoice == rock && computerChoice == scissors:
+      console.log("You win! Rock beats scissors.");
+      humanScore++;
+      break;
+    default:
+      console.log("Not quite sure who wins here...");
   }
-  // rebuild above if else statements as switch statement;
-  // make "else" statement the default within switch statement
 }
-
-//   switch (true) {
-//     case humanChoice == computerChoice:
-//       console.log("You drew the same thing! No winners here.");
-//     break;
-
-//   }
-// }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice(Math.random());
-// const computerSelection = getComputerChoice(0.2);
 
 playRound(humanSelection, computerSelection);
 
