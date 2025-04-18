@@ -1,93 +1,82 @@
-const rock = "rock";
-const paper = "paper";
-const scissors = "scissors";
-
 function getComputerChoice(compChoice) {
   if (compChoice <= 0.3) {
-    return rock;
+    return "rock";
   } else if (compChoice > 0.3 && compChoice <= 0.6) {
-    return paper;
+    return "paper";
   } else if (compChoice > 0.6 && compChoice <= 1) {
-    return scissors;
+    return "scissors";
   }
 }
 
 function getHumanChoice() {
-  let humanChoiceInput = prompt(
-    `Your turn! Enter "rock", "paper" or "scissors" below:`
-  );
+  let humanChoice;
 
-  humanChoiceInput = humanChoiceInput.toLowerCase();
+  const userRockButton = document.querySelector("#user-rock-button");
+  const userPaperButton = document.querySelector("#user-paper-button");
+  const userScissorsButton = document.querySelector("#user-scissors-button");
 
-  if (
-    humanChoiceInput !== rock &&
-    humanChoiceInput !== paper &&
-    humanChoiceInput !== scissors
-  ) {
-    alert(`You must choose either "rock", "paper" or "scissors".`);
-  } else {
-    alert("Good luck!");
-  }
+  userRockButton.addEventListener("click", () => {
+    humanChoice = "rock";
+    return humanChoice;
+  });
 
-  return humanChoiceInput;
+  userPaperButton.addEventListener("click", () => {
+    humanChoice = "paper";
+    return humanChoice;
+  });
+
+  userScissorsButton.addEventListener("click", () => {
+    humanChoice = "scissors";
+    return humanChoice;
+  });
 }
 
 function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
   function playRound(humanChoice, computerChoice) {
     switch (true) {
-      case humanChoice == computerChoice:
+      case humanChoice === computerChoice:
         console.log("You drew the same thing! No winners here.");
         break;
-      case humanChoice == paper && computerChoice == scissors:
+      case humanChoice === "paper" && computerChoice === "scissors":
         console.log("Computer wins! Scissors beats paper.");
-        computerScore++;
+        // computerScore++;
         break;
-      case humanChoice == scissors && computerChoice == paper:
+      case humanChoice === "scissors" && computerChoice === "paper":
         console.log("You win! Scissors beats paper.");
-        humanScore++;
+        // humanScore++;
         break;
-      case humanChoice == rock && computerChoice == paper:
+      case humanChoice === "rock" && computerChoice === "paper":
         console.log("Computer wins! Paper beats rock.");
-        computerScore++;
+        // computerScore++;
         break;
-      case humanChoice == paper && computerChoice == rock:
+      case humanChoice === "paper" && computerChoice === "rock":
         console.log("You win! Paper beats rock.");
-        humanScore++;
+        // humanScore++;
         break;
-      case humanChoice == scissors && computerChoice == rock:
+      case humanChoice === "scissors" && computerChoice === "rock":
         console.log("Computer wins! Rock beats scissors.");
-        computerScore++;
+        // computerScore++;
         break;
-      case humanChoice == rock && computerChoice == scissors:
+      case humanChoice === "rock" && computerChoice === "scissors":
         console.log("You win! Rock beats scissors.");
-        humanScore++;
+        // humanScore++;
         break;
       default:
         console.log("Not quite sure who wins here...");
     }
   }
 
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice(Math.random());
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice(Math.random());
 
-    playRound(humanSelection, computerSelection);
-
-    console.log(
-      `You have ${humanScore} point(s) and the computer has ${computerScore} point(s).`
-    );
-  }
-
-  if (humanScore > computerScore) {
-    alert("You won this game!");
-  } else if (computerScore > humanScore) {
-    alert("Unlucky, the computer wins this game!");
-  } else {
-    alert("It's a draw!");
-  }
+  console.log(
+    "this is what the user selection and computer selection are coming out as when the playRound function is called",
+    playRound(humanSelection, computerSelection)
+  );
 }
 
-playGame();
+const userRpsButtons = document.querySelectorAll(".user-rps-buttons");
+
+userRpsButtons.forEach((button) => {
+  button.addEventListener("click", playGame);
+});
