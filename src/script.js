@@ -4,7 +4,7 @@ buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     const humanChoice = e.target.dataset.choice;
     const computerChoice = getComputerChoice(Math.random());
-    playGame(humanChoice, computerChoice);
+    playRound(humanChoice, computerChoice);
   });
 });
 
@@ -18,33 +18,47 @@ function getComputerChoice(num) {
   }
 }
 
-function playGame(humanChoice, computerChoice) {
-  console.log(`You chose ${humanChoice}`);
-  console.log(`Computer chose ${computerChoice}`);
+function playRound(humanChoice, computerChoice) {
+  // select results div using query selector and store inside results variable
+  // add innerText property to results variable and create child p element to display user choice - add class of user choice
+  // repeat above for computer choice
+
+  let results = document.querySelector(".results");
+  let userSelection = document.createElement("p");
+  userSelection.innerText = `You chose ${humanChoice}`;
+
+  let computerSelection = document.createElement("p");
+  computerSelection.innerText = `Computer chose ${computerChoice}`;
+
+  let roundResult = document.createElement("p");
+
+  results.appendChild(userSelection);
+  results.appendChild(computerSelection);
+  results.appendChild(roundResult);
 
   switch (true) {
     case humanChoice === computerChoice:
-      console.log("You drew the same thing! No winners here.");
+      roundResult.innerText = "You drew the same thing! No winners here.";
       break;
     case humanChoice === "paper" && computerChoice === "scissors":
-      console.log("Computer wins! Scissors beats paper.");
+      roundResult.innerText = "Computer wins! Scissors beats paper.";
       break;
     case humanChoice === "scissors" && computerChoice === "paper":
-      console.log("You win! Scissors beats paper.");
+      roundResult.innerText = "You win! Scissors beats paper.";
       break;
     case humanChoice === "rock" && computerChoice === "paper":
-      console.log("Computer wins! Paper beats rock.");
+      roundResult.innerText = "Computer wins! Paper beats rock.";
       break;
     case humanChoice === "paper" && computerChoice === "rock":
-      console.log("You win! Paper beats rock.");
+      roundResult.innerText = "You win! Paper beats rock.";
       break;
     case humanChoice === "scissors" && computerChoice === "rock":
-      console.log("Computer wins! Rock beats scissors.");
+      roundResult.innerText = "Computer wins! Rock beats scissors.";
       break;
     case humanChoice === "rock" && computerChoice === "scissors":
-      console.log("You win! Rock beats scissors.");
+      roundResult.innerText = "You win! Rock beats scissors.";
       break;
     default:
-      console.log("Not quite sure who wins here...");
+      roundResult.innerText = "Not quite sure who wins here...";
   }
 }
