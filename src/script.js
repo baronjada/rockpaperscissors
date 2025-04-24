@@ -18,47 +18,60 @@ function getComputerChoice(num) {
   }
 }
 
+let userScore = 0;
+let computerScore = 0;
+let roundCount = 0;
+
+let results = document.querySelector(".results");
+let playerSelections = document.createElement("p");
+let scoreboardHeading = document.createElement("h3");
+let roundResult = document.createElement("p");
+let finalScore = document.createElement("p");
+
+scoreboardHeading.innerText = "Scoreboard";
+
+results.append(playerSelections);
+results.append(scoreboardHeading);
+results.append(roundResult);
+results.append(finalScore);
+
 function playRound(humanChoice, computerChoice) {
-  // select results div using query selector and store inside results variable
-  // add innerText property to results variable and create child p element to display user choice - add class of user choice
-  // repeat above for computer choice
+  if (roundCount < 5) {
+    playerSelections.textContent = `You chose ${humanChoice} and Computer chose ${computerChoice}...`;
 
-  let results = document.querySelector(".results");
-  let userSelection = document.createElement("p");
-  userSelection.innerText = `You chose ${humanChoice}`;
+    switch (true) {
+      case humanChoice === computerChoice:
+        roundResult.textContent = "Draw!";
+        break;
+      case humanChoice === "paper" && computerChoice === "scissors":
+      case humanChoice === "rock" && computerChoice === "paper":
+      case humanChoice === "scissors" && computerChoice === "rock":
+        roundResult.textContent = "Computer wins this round!";
+        computerScore++;
+        break;
+      default:
+        roundResult.textContent = "You win this round!";
+        userScore++;
+    }
 
-  let computerSelection = document.createElement("p");
-  computerSelection.innerText = `Computer chose ${computerChoice}`;
+    let userScoreHeading = document.querySelector(".user-score-heading");
+    let computerScoreHeading = document.querySelector(
+      ".computer-score-heading"
+    );
 
-  let roundResult = document.createElement("p");
+    userScoreHeading.textContent = `You: ${userScore}`;
+    computerScoreHeading.textContent = `Computer: ${computerScore}`;
 
-  results.appendChild(userSelection);
-  results.appendChild(computerSelection);
-  results.appendChild(roundResult);
+    roundCount++;
 
-  switch (true) {
-    case humanChoice === computerChoice:
-      roundResult.innerText = "You drew the same thing! No winners here.";
-      break;
-    case humanChoice === "paper" && computerChoice === "scissors":
-      roundResult.innerText = "Computer wins! Scissors beats paper.";
-      break;
-    case humanChoice === "scissors" && computerChoice === "paper":
-      roundResult.innerText = "You win! Scissors beats paper.";
-      break;
-    case humanChoice === "rock" && computerChoice === "paper":
-      roundResult.innerText = "Computer wins! Paper beats rock.";
-      break;
-    case humanChoice === "paper" && computerChoice === "rock":
-      roundResult.innerText = "You win! Paper beats rock.";
-      break;
-    case humanChoice === "scissors" && computerChoice === "rock":
-      roundResult.innerText = "Computer wins! Rock beats scissors.";
-      break;
-    case humanChoice === "rock" && computerChoice === "scissors":
-      roundResult.innerText = "You win! Rock beats scissors.";
-      break;
-    default:
-      roundResult.innerText = "Not quite sure who wins here...";
+    if (roundCount === 5) {
+      finalScore.innerText =
+        userScore > computerScore
+          ? "You win the game! 🎉"
+          : userScore < computerScore
+          ? "Computer wins the game! 💻"
+          : "It's a tie! 🤝";
+      results.append(finalScore);
+    }
   }
 }
