@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-rps-buttons-container {
+  padding: 64px 0px 32px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 60px;
+}
+
+.user-rps-buttons {
+  font-size: 120px;
+  padding: 12px 24px;
+  border: none;
+  background-color: white;
+  transition: all 120ms ease-in-out;
+}
+
+.user-rps-buttons:hover {
+  margin-top: -22px;
+  transform: scale(1.1);
+}
+
+.game-updates {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}

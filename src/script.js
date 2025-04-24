@@ -31,9 +31,14 @@ let finalScore = document.createElement("p");
 scoreboardHeading.innerText = "Scoreboard";
 
 results.append(playerSelections);
-results.append(scoreboardHeading);
 results.append(roundResult);
+results.append(scoreboardHeading);
 results.append(finalScore);
+
+playerSelections.style.marginBottom = "18px";
+scoreboardHeading.style.marginBottom = "12px";
+scoreboardHeading.style.display = "none";
+roundResult.style.marginBottom = "36px";
 
 function playRound(humanChoice, computerChoice) {
   if (roundCount < 5) {
@@ -58,6 +63,8 @@ function playRound(humanChoice, computerChoice) {
     let computerScoreHeading = document.querySelector(
       ".computer-score-heading"
     );
+
+    scoreboardHeading.style.display = "block";
 
     userScoreHeading.textContent = `You: ${userScore}`;
     computerScoreHeading.textContent = `Computer: ${computerScore}`;
