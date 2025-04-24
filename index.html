@@ -4,9 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
+    <main>
+      <div class="user-rps-buttons-container">
+        <button
+          class="user-rps-buttons"
+          data-choice="rock"
+          id="user-rock-button"
+        >
+          🪨
+        </button>
+        <button
+          class="user-rps-buttons"
+          data-choice="paper"
+          id="user-paper-button"
+        >
+          📃
+        </button>
+        <button
+          class="user-rps-buttons"
+          data-choice="scissors"
+          id="user-scissors-button"
+        >
+          ✂️
+        </button>
+      </div>
+      <div class="game-updates">
+        <div class="results"></div>
+        <h3 class="user-score-heading"></h3>
+        <h3 class="computer-score-heading"></h3>
+      </div>
+    </main>
+
     <script src="src/script.js"></script>
-    <div><p id="score"></p></div>
   </body>
 </html>

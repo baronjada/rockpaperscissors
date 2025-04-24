@@ -1,93 +1,84 @@
-const rock = "rock";
-const paper = "paper";
-const scissors = "scissors";
+const buttons = document.querySelectorAll(".user-rps-buttons");
 
-function getComputerChoice(compChoice) {
-  if (compChoice <= 0.3) {
-    return rock;
-  } else if (compChoice > 0.3 && compChoice <= 0.6) {
-    return paper;
-  } else if (compChoice > 0.6 && compChoice <= 1) {
-    return scissors;
-  }
-}
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const humanChoice = e.target.dataset.choice;
+    const computerChoice = getComputerChoice(Math.random());
+    playRound(humanChoice, computerChoice);
+  });
+});
 
-function getHumanChoice() {
-  let humanChoiceInput = prompt(
-    `Your turn! Enter "rock", "paper" or "scissors" below:`
-  );
-
-  humanChoiceInput = humanChoiceInput.toLowerCase();
-
-  if (
-    humanChoiceInput !== rock &&
-    humanChoiceInput !== paper &&
-    humanChoiceInput !== scissors
-  ) {
-    alert(`You must choose either "rock", "paper" or "scissors".`);
+function getComputerChoice(num) {
+  if (num <= 0.3) {
+    return "rock";
+  } else if (num <= 0.6) {
+    return "paper";
   } else {
-    alert("Good luck!");
+    return "scissors";
   }
-
-  return humanChoiceInput;
 }
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
+let userScore = 0;
+let computerScore = 0;
+let roundCount = 0;
 
-  function playRound(humanChoice, computerChoice) {
+let results = document.querySelector(".results");
+let playerSelections = document.createElement("p");
+let scoreboardHeading = document.createElement("h3");
+let roundResult = document.createElement("p");
+let finalScore = document.createElement("p");
+
+scoreboardHeading.innerText = "Scoreboard";
+
+results.append(playerSelections);
+results.append(roundResult);
+results.append(scoreboardHeading);
+results.append(finalScore);
+
+playerSelections.style.marginBottom = "18px";
+scoreboardHeading.style.marginBottom = "12px";
+scoreboardHeading.style.display = "none";
+roundResult.style.marginBottom = "36px";
+
+function playRound(humanChoice, computerChoice) {
+  if (roundCount < 5) {
+    playerSelections.textContent = `You chose ${humanChoice} and Computer chose ${computerChoice}...`;
+
     switch (true) {
-      case humanChoice == computerChoice:
-        console.log("You drew the same thing! No winners here.");
+      case humanChoice === computerChoice:
+        roundResult.textContent = "Draw!";
         break;
-      case humanChoice == paper && computerChoice == scissors:
-        console.log("Computer wins! Scissors beats paper.");
+      case humanChoice === "paper" && computerChoice === "scissors":
+      case humanChoice === "rock" && computerChoice === "paper":
+      case humanChoice === "scissors" && computerChoice === "rock":
+        roundResult.textContent = "Computer wins this round!";
         computerScore++;
-        break;
-      case humanChoice == scissors && computerChoice == paper:
-        console.log("You win! Scissors beats paper.");
-        humanScore++;
-        break;
-      case humanChoice == rock && computerChoice == paper:
-        console.log("Computer wins! Paper beats rock.");
-        computerScore++;
-        break;
-      case humanChoice == paper && computerChoice == rock:
-        console.log("You win! Paper beats rock.");
-        humanScore++;
-        break;
-      case humanChoice == scissors && computerChoice == rock:
-        console.log("Computer wins! Rock beats scissors.");
-        computerScore++;
-        break;
-      case humanChoice == rock && computerChoice == scissors:
-        console.log("You win! Rock beats scissors.");
-        humanScore++;
         break;
       default:
-        console.log("Not quite sure who wins here...");
+        roundResult.textContent = "You win this round!";
+        userScore++;
+    }
+
+    let userScoreHeading = document.querySelector(".user-score-heading");
+    let computerScoreHeading = document.querySelector(
+      ".computer-score-heading"
+    );
+
+    scoreboardHeading.style.display = "block";
+
+    userScoreHeading.textContent = `You: ${userScore}`;
+    computerScoreHeading.textContent = `Computer: ${computerScore}`;
+
+    roundCount++;
+
+    if (roundCount === 5) {
+      finalScore.innerText =
+        userScore > computerScore
+          ? "You win the game! 🎉"
+          : userScore < computerScore
+          ? "Computer wins the game! 💻"
+          : "It's a tie! 🤝";
+      results.append(finalScore);
     }
   }
-
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice(Math.random());
-
-    playRound(humanSelection, computerSelection);
-
-    console.log(
-      `You have ${humanScore} point(s) and the computer has ${computerScore} point(s).`
-    );
-  }
-
-  if (humanScore > computerScore) {
-    alert("You won this game!");
-  } else if (computerScore > humanScore) {
-    alert("Unlucky, the computer wins this game!");
-  } else {
-    alert("It's a draw!");
-  }
 }
-
-playGame();
